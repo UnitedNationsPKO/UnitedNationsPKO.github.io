@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>United Nations PKO | 公式ポータル</title>
+    <title>United Nations PKO | Official Portal</title>
 
     <style>
         body {
@@ -22,7 +22,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 20px 48px;
-            background: #0b2a44; /* 大学サイトに近い濃紺 */
+            background: #0b2a44;
             color: #ffffff;
             font-size: 14px;
             border-bottom: 1px solid rgba(255,255,255,0.2);
@@ -34,25 +34,18 @@
             white-space: nowrap;
         }
 
-        /* ロゴ画像の代わりにテキストをメインリンクに */
         .univ-name {
             font-weight: 600;
             font-size: 20px;
             margin-right: 30px;
             letter-spacing: 1px;
             cursor: pointer;
-            transition: opacity 0.3s;
-        }
-
-        .univ-name:hover {
-            opacity: 0.7;
         }
 
         .nav-item {
             padding: 0 15px;
             cursor: pointer;
             font-size: 15px;
-            opacity: 0.9;
         }
 
         .nav-item:hover {
@@ -72,6 +65,9 @@
             background: rgba(255,255,255,0.1);
             padding: 5px 12px;
             border-radius: 2px;
+            border: none;
+            color: white;
+            font-family: inherit;
         }
 
         .right-item:hover {
@@ -82,10 +78,7 @@
         .hero {
             position: relative;
             height: 80vh;
-            /* 画像がない場合のダミー背景 */
             background: linear-gradient(135deg, #0b2a44 0%, #0088cc 100%);
-            background-size: cover;
-            background-position: center;
             display: flex;
             align-items: center;
             justify-content: flex-end;
@@ -98,59 +91,92 @@
             z-index: 1;
         }
 
-        .hero-en {
+        .hero-en-title {
             font-size: 56px;
             font-weight: 600;
             line-height: 1.15;
             text-transform: uppercase;
         }
 
-        .hero-ja {
+        .hero-sub-title {
             font-size: 18px;
             letter-spacing: 0.2em;
             margin-top: 14px;
             opacity: 0.9;
         }
+
+        /* 言語切り替え用の表示制御 */
+        .lang-en { display: none; } /* 初期状態は英語を隠す */
     </style>
 </head>
 
 <body>
 
     <div class="top-bar">
-
         <div class="top-left">
             <a href="index.html" class="univ-name">UNITED NATIONS PKO</a>
 
             <div class="org-links">
-                <a href="operation.html" class="nav-item">作戦展開</a>
-                <a href="#records" class="nav-item">活動報告</a>
-                <a href="#security" class="nav-item">安全保障</a>
-                <a href="#personnel" class="nav-item">人事・広報</a>
-                
-                <a href="#archives" class="nav-item">アーカイブ</a>
-                <a href="#member" class="nav-item">加盟国専用</a>
+                <a href="operation.html" class="nav-item">
+                    <span class="lang-ja">作戦展開</span>
+                    <span class="lang-en">Operations</span>
+                </a>
+                <a href="records.html" class="nav-item">
+                    <span class="lang-ja">活動報告</span>
+                    <span class="lang-en">Reports</span>
+                </a>
+                <a href="security.html" class="nav-item">
+                    <span class="lang-ja">安全保障</span>
+                    <span class="lang-en">Security</span>
+                </a>
+                <a href="member.html" class="nav-item">
+                    <span class="lang-ja">加盟国専用</span>
+                    <span class="lang-en">Member States</span>
+                </a>
             </div>
         </div>
 
         <div class="top-right">
-            <a href="emergency.html" class="right-item">緊急連絡</a>
-            <a href="access.html" class="right-item">本部アクセス</a>
-            <span class="right-item">Language</span>
+            <a href="emergency.html" class="right-item">
+                <span class="lang-ja">緊急連絡</span>
+                <span class="lang-en">Emergency</span>
+            </a>
+            <button class="right-item" onclick="toggleLanguage()">Language: JP/EN</button>
         </div>
-
     </div>
 
     <section class="hero">
         <div class="hero-text">
-            <div class="hero-en">
-                Maintaining Peace<br>
-                For the Future
+            <div class="hero-en-title">
+                <span class="lang-ja">Maintaining Peace<br>For the Future</span>
+                <span class="lang-en">Maintaining Peace<br>For the Future</span>
             </div>
-            <div class="hero-ja">
-                平和を維持し、次へ繋ぐ。
+            <div class="hero-sub-title">
+                <span class="lang-ja">平和を維持し、次世代へ繋ぐ。</span>
+                <span class="lang-en">Dedicated to Global Stability and Peace.</span>
             </div>
         </div>
     </section>
+
+    <script>
+        // 言語を切り替えるためのJavaScript
+        let currentLang = 'ja';
+
+        function toggleLanguage() {
+            const jaElements = document.querySelectorAll('.lang-ja');
+            const enElements = document.querySelectorAll('.lang-en');
+
+            if (currentLang === 'ja') {
+                jaElements.forEach(el => el.style.display = 'none');
+                enElements.forEach(el => el.style.display = 'inline-block');
+                currentLang = 'en';
+            } else {
+                jaElements.forEach(el => el.style.display = 'inline-block');
+                enElements.forEach(el => el.style.display = 'none');
+                currentLang = 'ja';
+            }
+        }
+    </script>
 
 </body>
 </html>
