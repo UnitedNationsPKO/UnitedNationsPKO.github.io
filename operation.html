@@ -2,22 +2,17 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>United Nations PKO | Official Portal</title>
+    <title>Operations | United Nations PKO</title>
     <style>
-        /* レイアウトの崩れを防ぐ設定 */
-        * { box-sizing: border-box; }
-        
         body {
             margin: 0;
             font-family: "Times New Roman", "Hiragino Mincho ProN", serif;
             background: #ffffff;
-            line-height: 1.6;
+            color: #1a1a1a;
         }
-
         a { color: inherit; text-decoration: none; }
 
-        /* ===== TOP BAR (サイズ固定版) ===== */
+        /* ===== TOP BAR (共通) ===== */
         .top-bar {
             display: flex;
             align-items: center;
@@ -25,99 +20,67 @@
             padding: 20px 48px;
             background: #0b2a44;
             color: #ffffff;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
+            font-size: 14px;
+        }
+        .univ-name { font-weight: 600; font-size: 20px; cursor: pointer; }
+        .nav-item { padding: 0 15px; cursor: pointer; font-size: 15px; }
+        .nav-item:hover { text-decoration: underline; }
+        .right-item { cursor: pointer; background: rgba(255,255,255,0.1); padding: 5px 12px; border-radius: 2px; border: none; color: white; }
+
+        /* ===== MAIN CONTENT ===== */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
         }
 
-        .top-left {
+        .page-title {
+            border-bottom: 2px solid #0b2a44;
+            padding-bottom: 10px;
+            margin-bottom: 40px;
+        }
+        .page-title h1 { margin: 0; font-size: 28px; letter-spacing: 1px; }
+
+        /* 作戦リストのスタイル */
+        .op-card {
+            display: flex;
+            border: 1px solid #ddd;
+            margin-bottom: 30px;
+            transition: transform 0.2s;
+        }
+        .op-card:hover {
+            transform: translateX(10px);
+            border-color: #0088cc;
+        }
+        .op-img {
+            width: 300px;
+            background: #eee;
             display: flex;
             align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #aaa;
         }
-
-        .univ-name {
-            font-weight: 600;
-            font-size: 20px;
-            margin-right: 30px;
-            letter-spacing: 1px;
-            white-space: nowrap;
+        .op-info {
+            padding: 25px;
+            flex: 1;
         }
-
-        /* --- ここが重要：メニューのガタつき防止 --- */
-        .nav-links {
-            display: flex;
-        }
-
-        .nav-item {
+        .op-status {
             display: inline-block;
-            width: 110px;        /* 英語の Reports 等が入る幅に固定 */
-            text-align: center;   /* 文字を中央寄せ */
-            cursor: pointer;
-            font-size: 15px;
-            transition: opacity 0.2s;
-        }
-
-        .nav-item:hover {
-            text-decoration: underline;
-            opacity: 0.8;
-        }
-
-        /* -------------------------------------- */
-
-        .top-right {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .right-item {
-            cursor: pointer;
-            background: rgba(255,255,255,0.1);
-            padding: 5px 15px;
-            border-radius: 2px;
-            border: 1px solid rgba(255,255,255,0.3);
+            background: #cc0000;
             color: white;
-            font-size: 13px;
-            width: 140px;        /* ボタン自体の幅も固定 */
-            text-align: center;
+            padding: 2px 10px;
+            font-size: 12px;
+            margin-bottom: 10px;
         }
-
-        .right-item:hover {
-            background: rgba(255,255,255,0.2);
+        .op-name {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 0 0 10px 0;
+            color: #0b2a44;
         }
+        .op-desc { font-size: 15px; color: #555; line-height: 1.6; }
 
-        /* ===== HERO ===== */
-        .hero {
-            position: relative;
-            height: 80vh;
-            background: linear-gradient(135deg, #0b2a44 0%, #0088cc 100%);
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            padding-right: 8%;
-        }
-
-        .hero-text {
-            color: #ffffff;
-            text-align: right;
-        }
-
-        .hero-en-title {
-            font-size: 56px;
-            font-weight: 600;
-            line-height: 1.15;
-            text-transform: uppercase;
-        }
-
-        .hero-sub-title {
-            font-size: 18px;
-            letter-spacing: 0.2em;
-            margin-top: 14px;
-            opacity: 0.9;
-        }
-
-        /* 言語切り替え用 */
         .lang-en { display: none; }
     </style>
 </head>
@@ -126,50 +89,69 @@
     <div class="top-bar">
         <div class="top-left">
             <a href="index.html" class="univ-name">UNITED NATIONS PKO</a>
-
-            <div class="nav-links">
+            <div class="org-links">
                 <a href="operation.html" class="nav-item">
-                    <span class="lang-ja">作戦展開</span>
-                    <span class="lang-en">Operations</span>
+                    <span class="lang-ja">作戦展開</span><span class="lang-en">Operations</span>
                 </a>
                 <a href="records.html" class="nav-item">
-                    <span class="lang-ja">活動報告</span>
-                    <span class="lang-en">Reports</span>
+                    <span class="lang-ja">活動報告</span><span class="lang-en">Reports</span>
                 </a>
                 <a href="security.html" class="nav-item">
-                    <span class="lang-ja">安全保障</span>
-                    <span class="lang-en">Security</span>
+                    <span class="lang-ja">安全保障</span><span class="lang-en">Security</span>
                 </a>
             </div>
         </div>
+        <button class="right-item" onclick="toggleLanguage()">Language: JP/EN</button>
+    </div>
 
-        <div class="top-right">
-            <button class="right-item" onclick="toggleLanguage()">
-                <span class="lang-ja">Language: JP</span>
-                <span class="lang-en">Language: EN</span>
-            </button>
+    <div class="container">
+        <div class="page-title">
+            <h1>
+                <span class="lang-ja">現在展開中の作戦一覧</span>
+                <span class="lang-en">Current Operations</span>
+            </h1>
+        </div>
+
+        <div class="op-card">
+            <div class="op-img">IMAGE / MAP</div>
+            <div class="op-info">
+                <div class="status-box">
+                    <span class="op-status">ACTIVE</span>
+                </div>
+                <h2 class="op-name">
+                    <span class="lang-ja">第102 治安維持ミッション</span>
+                    <span class="lang-en">Mission 102: Security Maintenance</span>
+                </h2>
+                <p class="op-desc">
+                    <span class="lang-ja">北西部境界線における非武装地帯の監視および、地域住民の安全確保を目的としたパトロール活動。</span>
+                    <span class="lang-en">Monitoring the DMZ along the northwestern boundary and conducting patrols to ensure the safety of local residents.</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="op-card">
+            <div class="op-img">IMAGE / MAP</div>
+            <div class="op-info">
+                <div class="status-box">
+                    <span class="op-status" style="background:#0088cc;">SUPPORT</span>
+                </div>
+                <h2 class="op-name">
+                    <span class="lang-ja">人道支援ルート「ブルーライン」確保</span>
+                    <span class="lang-en">Operation: Blue Line Corridor</span>
+                </h2>
+                <p class="op-desc">
+                    <span class="lang-ja">食料および医薬品輸送車両の安全な通行を許可するため、主要幹線道路の検問および警護を実施。</span>
+                    <span class="lang-en">Establishing checkpoints and escorts on major highways to permit the safe passage of food and medical supply vehicles.</span>
+                </p>
+            </div>
         </div>
     </div>
 
-    <section class="hero">
-        <div class="hero-text">
-            <div class="hero-en-title">
-                Maintaining Peace<br>For the Future
-            </div>
-            <div class="hero-sub-title">
-                <span class="lang-ja">平和を維持し、次世代へ繋ぐ。</span>
-                <span class="lang-en">Dedicated to Global Stability and Peace.</span>
-            </div>
-        </div>
-    </section>
-
     <script>
         let currentLang = 'ja';
-
         function toggleLanguage() {
             const jaElements = document.querySelectorAll('.lang-ja');
             const enElements = document.querySelectorAll('.lang-en');
-
             if (currentLang === 'ja') {
                 jaElements.forEach(el => el.style.display = 'none');
                 enElements.forEach(el => el.style.display = 'inline-block');
@@ -181,6 +163,5 @@
             }
         }
     </script>
-
 </body>
 </html>
