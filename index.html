@@ -2,166 +2,175 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>United Nations Peacekeeping Operations | 公式ポータル</title>
+    <title>United Nations PKO | 国際連合平和維持活動</title>
+
     <style>
-        /* 基本設定 */
         body {
-            font-family: "Times New Roman", "MS PMincho", serif;
-            line-height: 1.8;
             margin: 0;
-            padding-top: 60px; /* トップバーの高さ分、中身を下げる */
-            color: #1a1a1a;
-            background-color: #ffffff;
+            font-family: "Times New Roman", "Hiragino Mincho ProN", serif;
+            background: #ffffff;
         }
 
-        /* --- トップバーのデザイン --- */
-        .top-navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 60px;
-            background-color: #004a7c; /* 濃いめのネイビーで引き締め */
-            color: white;
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* ===== TOP BAR (University Style) ===== */
+        .top-bar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 20px;
-            box-sizing: border-box;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            padding: 12px 40px;
+            background: #003366; /* より深いネイビー（信頼感） */
+            color: #ffffff;
+            font-size: 13px;
+            border-bottom: 3px solid #0088cc; /* 国連ブルーのアクセント */
         }
 
-        .nav-logo {
-            font-weight: bold;
-            font-size: 1.2rem;
+        .top-left {
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+        }
+
+        .logo {
+            height: 60px; /* ロゴ（国連旗など）のサイズ */
+            margin-right: 20px;
+        }
+
+        .org-line {
+            display: flex;
+            align-items: center;
+        }
+
+        .org-name {
+            font-weight: 700;
+            font-size: 18px;
+            margin-right: 25px;
             letter-spacing: 1px;
+        }
+
+        .nav-item {
+            padding: 0 10px;
+            cursor: pointer;
+            border-right: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        .nav-item:last-child { border-right: none; }
+
+        .nav-item:hover {
+            color: #0088cc;
+            text-decoration: none;
+        }
+
+        /* ---------- RIGHT ---------- */
+        .top-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            white-space: nowrap;
+        }
+
+        .right-item {
+            cursor: pointer;
+            padding: 4px 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+        }
+
+        .right-item:hover {
+            background: #0088cc;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            position: relative;
+            height: 85vh;
+            /* 画像がない場合は、国連っぽい青のグラデーションに */
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url("pko-main.jpg") center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end; /* テキストを右寄せ */
+        }
+
+        .hero-text {
+            margin-right: 8%;
+            color: #ffffff;
+            text-align: right;
+            z-index: 1;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+        }
+
+        .hero-en {
+            font-size: 64px;
+            font-weight: 700;
+            line-height: 1.1;
             text-transform: uppercase;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 20px;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-size: 0.9rem;
-            padding: 5px 10px;
-            border-radius: 4px;
-            transition: background 0.3s;
-        }
-
-        .nav-links a:hover {
-            background-color: #0088cc; /* マウスを置いた時の色 */
-        }
-
-        /* --- コンテンツのデザイン --- */
-        header {
-            background-color: #0088cc;
-            border-bottom: 4px solid #005580;
-            color: white;
-            padding: 4rem 1rem;
-            text-align: center;
-        }
-
-        .container {
-            max-width: 960px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        h1 { margin: 0; font-size: 2.2rem; letter-spacing: 2px; }
-        h2 { border-left: 5px solid #0088cc; padding-left: 15px; margin-top: 40px; }
-        
-        .news-box {
-            background: #f9f9f9;
-            border: 1px solid #ddd;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .mission-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+        .hero-ja {
+            font-size: 20px;
+            letter-spacing: 0.3em;
             margin-top: 20px;
+            font-weight: 300;
         }
 
-        @media (max-width: 600px) {
-            .mission-grid { grid-template-columns: 1fr; }
-            .nav-links { display: none; } /* スマホではリンクを隠す設定（簡易版） */
+        .hero-btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 30px;
+            border: 2px solid #ffffff;
+            color: #ffffff;
+            font-size: 16px;
+            transition: 0.3s;
         }
 
-        .mission-item {
-            border: 1px solid #eee;
-            padding: 15px;
-            background: #fff;
-        }
-
-        footer {
-            background: #333;
-            color: #ccc;
-            text-align: center;
-            padding: 40px;
-            margin-top: 60px;
-            font-size: 0.8rem;
+        .hero-btn:hover {
+            background: #ffffff;
+            color: #003366;
         }
     </style>
 </head>
+
 <body>
 
-    <nav class="top-navbar">
-        <div class="nav-logo">UN-PKO Portal</div>
-        <div class="nav-links">
-            <a href="#">HOME</a>
-            <a href="#mission">MISSION</a>
-            <a href="#records">RECORDS</a>
-            <a href="#recruit">RECRUIT</a>
+    <div class="top-bar">
+        <div class="top-left">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Flag_of_the_United_Nations.svg" alt="UN Logo" class="logo">
+
+            <div class="org-line">
+                <span class="org-name">United Nations PKO</span>
+
+                <a href="#about" class="nav-item">組織概要</a>
+                <a href="#mission" class="nav-item">展開ミッション</a>
+                <a href="#record" class="nav-item">活動記録</a>
+                <a href="#news" class="nav-item">プレスリリース</a>
+
+                <a href="#recruit" class="nav-item" style="color:#ffd700;">隊員志願</a> <a href="#safety" class="nav-item">安全指針</a>
+                <a href="#contact" class="nav-item">お問い合わせ</a>
+            </div>
         </div>
-    </nav>
 
-    <header>
-        <h1>UNITED NATIONS PKO</h1>
-        <p>Peacekeeping Operations Division - Central Command</p>
-    </header>
-
-    <div class="container">
-        <section id="mission">
-            <h2>重要通知 / Critical Notices</h2>
-            <div class="news-box">
-                <strong>2026.02.21：</strong> 通信プロトコルの暗号化レベルを更新。全隊員は端末の再認証を行ってください。
-            </div>
-        </section>
-
-        <section>
-            <h2>現在の展開状況</h2>
-            <p>本部は平和と安全の維持を目的とし、多国籍軍による迅速な対応体制を維持しています。</p>
-            
-            <div class="mission-grid">
-                <div class="mission-item">
-                    <h3>治安維持任務</h3>
-                    <p>地域住民の安全確保、および武装勢力の武装解除を目的とした哨戒活動を継続中です。</p>
-                </div>
-                <div class="mission-item">
-                    <h3>人道支援回廊の確保</h3>
-                    <p>支援物資の輸送を保証するため、主要幹線道路の警護およびインフラ整備を実施しています。</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="recruit">
-            <h2>隊員募集</h2>
-            <p>平和の維持には、あなたの規律と勇気が必要です。志願者は各管区の指令部へ連絡してください。</p>
-        </section>
+        <div class="top-right">
+            <span class="right-item">JP / EN</span>
+            <span class="right-item">ログイン</span>
+            <span class="right-item">緊急連絡網</span>
+        </div>
     </div>
 
-    <footer>
-        <p>UNITED NATIONS PEACEKEEPING OPERATIONS - OFFICIAL PORTAL</p>
-        <p>&copy; 2026 UN-PKO Division. Secure Connection Established.</p>
-    </footer>
+    <section class="hero">
+        <div class="hero-text">
+            <div class="hero-en">
+                Protecting Peace,<br>
+                Building the Future
+            </div>
+            <div class="hero-ja">
+                平和を守り、未来を築く。
+            </div>
+            <a href="#recruit" class="hero-btn">派遣隊員志願はこちら</a>
+        </div>
+    </section>
 
 </body>
 </html>
